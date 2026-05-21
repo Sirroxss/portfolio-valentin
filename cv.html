@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentin Michel | CV Intéractif</title>
+    
+    <!-- Importation des polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --sidebar-bg: #2b3d5b; /* Bleu nuit du CV original */
+            --accent: #eab308; /* Jaune moutarde du CV original */
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION (MODIFIÉE POUR ÊTRE TRÈS VISIBLE) --- */
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 15px 5%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-link { text-decoration: none; display: flex; align-items: center; }
+        .logo {
+            background: var(--text-dark); color: var(--text-light);
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-family: 'Montserrat', sans-serif; font-weight: 900;
+            font-size: 1.2rem; transition: transform 0.3s;
+        }
+        .logo-link:hover .logo { transform: scale(1.05); }
+
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            gap: 15px; 
+            margin: 0; 
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none; 
+            color: var(--text-dark); 
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            padding: 10px 20px;
+            border-radius: 30px; /* Effet Gélule/Bouton */
+            transition: all 0.3s ease; 
+        }
+
+        nav a:hover {
+            background-color: #f1f5f9; /* Gris très clair au survol */
+            transform: translateY(-2px);
+        }
+
+        /* Le style de la page active (très visible) */
+        nav a.active {
+            background-color: var(--sidebar-bg); /* Bleu nuit pour rappeler la sidebar */
+            color: var(--text-light) !important;
+            box-shadow: 0 4px 15px rgba(43, 61, 91, 0.3);
+        }
+
+        /* --- LAYOUT DU CV --- */
+        .cv-container {
+            max-width: 1300px;
+            margin: 130px auto 60px;
+            display: flex;
+            gap: 40px;
+            padding: 0 20px;
+            align-items: flex-start;
+        }
+
+        /* --- SIDEBAR (GAUCHE) --- */
+        .sidebar {
+            flex: 0 0 350px;
+            background-color: var(--sidebar-bg);
+            color: var(--text-light);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: sticky;
+            top: 110px;
+            box-shadow: 0 20px 40px rgba(43, 61, 91, 0.2);
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .sidebar-section {
+            margin-bottom: 35px;
+        }
+
+        .sidebar-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .contact-icon { font-size: 1.2rem; }
+        .contact-text a { color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+        .contact-text a:hover { color: var(--accent); }
+
+        /* Tags de compétences */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-left: 3px solid var(--accent);
+            transition: transform 0.2s;
+        }
+
+        .skill-tag:hover { transform: translateX(5px); background-color: rgba(255,255,255,0.15); }
+
+        .language-item, .hobby-item {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .level { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+
+        /* --- CONTENU PRINCIPAL (DROITE) --- */
+        .main-content {
+            flex: 1;
+            min-width: 0; /* Prevents overflow issues */
+        }
+
+        .header-cv {
+            margin-bottom: 50px;
+        }
+
+        .header-cv h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .header-cv h1 span { color: var(--sidebar-bg); }
+
+        .header-cv h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--sidebar-bg);
+        }
+
+        .section-main {
+            margin-bottom: 50px;
+        }
+
+        .section-main-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background-color: var(--accent);
+            opacity: 0.3;
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        /* Frise Chronologique pour les cartes */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 2px;
+            background-color: #cbd5e1;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 35px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px #cbd5e1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .card-subtitle {
+            font-weight: 500;
+            color: var(--sidebar-bg);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .card-date {
+            background-color: var(--bg-color);
+            color: var(--text-gray);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card-list {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: var(--text-gray);
+        }
+
+        .card-list li { margin-bottom: 8px; }
+
+        /* --- BOUTON TÉLÉCHARGEMENT --- */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--sidebar-bg);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(43, 61, 91, 0.2);
+        }
+
+        .download-btn:hover {
+            background-color: var(--text-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(26, 26, 26, 0.3);
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 992px) {
+            .cv-container { flex-direction: column; }
+            .sidebar { flex: auto; width: 100%; position: relative; top: 0; margin-bottom: 40px; }
+            .header-cv h1 { font-size: 2.5rem; }
+            .card-header { flex-direction: column; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <a href="index.html" class="logo-link">
+            <div class="logo">VM</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#a-propos">À propos</a></li>
+                <li><a href="cv.html" class="active">CV</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CV CONTAINER -->
+    <div class="cv-container">
+
+        <!-- GAUCHE : SIDEBAR PROFIL -->
+        <aside class="sidebar">
+            <img src="Valentin.png" alt="Valentin Michel" class="profile-pic">
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Contact</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <div class="contact-text">07 72 23 87 02</div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <div class="contact-text"><a href="mailto:michelvalentin432@gmail.com">michelvalentin432@gmail.com</a></div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div class="contact-text">
+                        27 rue docteur Eugène Fontanilles (42000)<br>
+                        800 route de Trèches Raucoules (43290)
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <div class="contact-text"><a href="https://www.linkedin.com/in/valentin-michel-175861266" target="_blank">Profil LinkedIn</a></div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Compétences</h3>
+                <div class="skills-container">
+                    <div class="skill-tag">CRM / Vente</div>
+                    <div class="skill-tag">Gestion Base de Données</div>
+                    <div class="skill-tag">Pack Office (Expert)</div>
+                    <div class="skill-tag">Adobe InDesign</div>
+                    <div class="skill-tag">Premiere Pro</div>
+                    <div class="skill-tag">Canva Pro</div>
+                    <div class="skill-tag">CMS WordPress</div>
+                </div>
+                <div style="margin-top: 15px; font-size: 0.85rem; opacity: 0.8;">
+                    Permis B / A - Score IAE 210/400
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Langues</h3>
+                <div class="language-item">🇫🇷 Français <span class="level">(Maternelle)</span></div>
+                <div class="language-item">🇬🇧 Anglais <span class="level">(B2 - 835 TOEIC)</span></div>
+                <div class="language-item">🇩🇪 Allemand <span class="level">(A2)</span></div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Intérêts</h3>
+                <div class="hobby-item">🎣 Pêche de rivière dynamique</div>
+                <div class="hobby-item">🏍️ Sports mécaniques (Moto/Quad)</div>
+                <div class="hobby-item">💻 Nouvelles technologies</div>
+            </div>
+        </aside>
+
+        <!-- DROITE : CONTENU PRINCIPAL -->
+        <main class="main-content">
+            
+            <div class="header-cv">
+                <h1>Valentin <span>MICHEL</span></h1>
+                <h2>Recherche d'alternance - Master Management / Commerce</h2>
+                <div class="intro-text">
+                    Fort d'une double compétence en développement commercial B2B et marketing digital. Ayant participé à des projets d'innovations, je recherche une alternance (Septembre 2026/2027) pour continuer à accumuler de l'expérience et utiliser mes compétences.
+                </div>
+            </div>
+
+            <section class="section-main">
+                <h3 class="section-main-title">Expériences Pro</h3>
+                <div class="timeline">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h4 class="card-title">Alternant assistant commercial / communication</h4>
+                                <div class="card-subtitle">Ecoléa Technologie / Huilerie d'Arléa, Unieux</div>
+                            </div>
+                            <div class="card-date">Sept 2025 - 2026</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>Participation aux actions commerciales : Suivi, négociation, relance et fidélisation.</li>
+                            <li>Co-pilotage d'un projet d'innovation durable : création d'un nouveau business model pour la valorisation de résidus industriels (tourteau).</li>
+                            <li>Conception de supports de communication techniques et visuels (print & digital).</li>
+                            <li>Participation à la production et aux aspects techniques des projets.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h4 class="card-title">Vainqueur du concours entrepreneuriat</h4>
+                                <div class="card-subtitle">IUT Saint-Etienne</div>
+                            </div>
+                            <div class="card-date">Sept - Avril 2024-2025</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>Création d'un projet d'entreprise de référencement local.</li>
+                            <li>Présentation face à un incubateur pour démontrer et convaincre la faisabilité du projet.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h4 class="card-title">Stagiaire en communication</h4>
+                                <div class="card-subtitle">Groupe Moulinvest, Dunières - Boisset-lès-Montrond</div>
+                            </div>
+                            <div class="card-date">Mai - Juin 2025</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>Conception de supports de communication internes (panneaux, livrets) et externes (catalogue, fiches produits).</li>
+                            <li>Amélioration des sites web à travers le search engine optimization (SEO).</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="section-main">
+                <h3 class="section-main-title">Formations</h3>
+                <div class="timeline">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h4 class="card-title">Bachelor universitaire de technologie</h4>
+                                <div class="card-subtitle">IUT Jean Monnet, Saint Etienne</div>
+                            </div>
+                            <div class="card-date">2023 - 2026</div>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 10px;">
+                            3ème année de BUT Techniques de Commercialisation.<br>
+                            Spécialité MDEE (Marketing Digital Entrepreneuriat et e-commerce).
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h4 class="card-title">Baccalauréat</h4>
+                                <div class="card-subtitle">Lycée ESCY St-Gabriel, Yssingeaux</div>
+                            </div>
+                            <div class="card-date">2020 - 2023</div>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 10px;">
+                            Spécialités : SES et Histoire Géopolitique.<br>
+                            <strong>Mention Bien</strong>.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- BOUTON TÉLÉCHARGEMENT PDF -->
+            <a href="CV Valentin Michel (6).pdf" class="download-btn" target="_blank" download>
+                📥 Télécharger en PDF
+            </a>
+
+        </main>
+    </div>
+
+</body>
+</html>

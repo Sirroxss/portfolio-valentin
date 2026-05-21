@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentin Michel | Contact</title>
+    
+    <!-- Importation des polices Google Fonts dont Permanent Marker pour l'effet surligneur -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@300;400;500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET ET STYLE GLOBAL --- */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            color: #1a1a1a; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: relative;
+            width: 100%;
+            padding: 50px 0; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        /* --- LA BALLE LOGO VM --- */
+        .logo-ball {
+            position: fixed; 
+            z-index: 1000;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 85px;
+            height: 85px;
+            background: #1a1a1a;
+            color: #ffffff;
+            border-radius: 50%;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            user-select: none;
+            will-change: left, top, transform;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-ball.bouncing {
+            animation: tennisBounce 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+        }
+
+        @keyframes tennisBounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+
+        /* --- SECTION HERO AVEC VIDÉO --- */
+        .hero-contact {
+            position: relative;
+            width: 100%;
+            height: 80vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 80px;
+            /* Effet bordure irrégulière "coup de crayon" */
+            clip-path: polygon(
+                2% 2%, 98% 1%, 99% 97%, 1% 99%, 0% 50%, 
+                0.5% 25%, 1.5% 5%, 50% 0.5%, 95% 2%, 
+                99.5% 45%, 98.5% 75%, 97% 98%, 45% 99.5%, 5% 98%
+            );
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Cadre Blanc Ajusté (Moins transparent pour être "plus blanc") */
+        .hero-content-box {
+            position: relative;
+            z-index: 2;
+            max-width: 900px; 
+            width: 85%;
+            padding: 30px 40px; 
+            background: rgba(255, 255, 255, 0.65); /* Passé de 0.4 à 0.65 pour un rendu plus blanc */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 0; 
+            text-align: center;
+            color: #1a1a1a; 
+            margin: 40px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Titre avec effet surligneur noir et police Permanent Marker */
+        .contact-title { 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
+            font-family: 'Permanent Marker', cursive; 
+            margin-bottom: 20px; 
+            text-transform: lowercase;
+            display: inline-block;
+            color: #ffffff; /* Texte blanc */
+            background-color: #1a1a1a; /* Fond noir "surligneur" */
+            padding: 5px 25px;
+            transform: rotate(-1.5deg); /* Légère inclinaison accentuée */
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+        }
+
+        .contact-intro { 
+            font-size: 1.1rem; 
+            line-height: 1.5; 
+            font-weight: 500; 
+            margin-bottom: 25px; 
+            color: #000000;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cv-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #1a1a1a; 
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .cv-button:hover {
+            transform: translateY(-3px) rotate(1deg);
+            background-color: #000;
+        }
+
+        /* --- ÉLÉMENTS D'ANIMATION --- */
+        #fishing-lake { position: fixed; width: 160px; height: 50px; background: #74c0fc; border-radius: 50%; z-index: 998; opacity: 0; transform: scale(0); transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: inset 0 10px 20px rgba(0,0,0,0.2), inset 0 2px 5px rgba(0,0,0,0.3), 0 5px 15px rgba(116, 192, 252, 0.3); pointer-events: none; }
+        #fishing-lake.active { opacity: 1; transform: scale(1); }
+        #fishing-rod-svg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; opacity: 0; transition: opacity 0.4s ease; }
+        #fishing-rod-svg.active { opacity: 1; }
+        #rod-stick { stroke: #5d4037; stroke-width: 4; stroke-linecap: round; }
+        #rod-line { fill: none; stroke: #1a1a1a; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 4; }
+
+        #working-laptop { position: fixed; width: 70px; height: 50px; z-index: 999; opacity: 0; transform: scale(0); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; }
+        .laptop-base { position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: #d1d1d1; border-radius: 2px 2px 6px 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-bottom: 2px solid #b0b0b0; }
+        .laptop-screen { position: absolute; bottom: 6px; left: 4px; width: 62px; height: 42px; background: #1a1a1a; border-radius: 4px; border: 2px solid #d1d1d1; transform-origin: bottom; transform: perspective(200px) rotateX(10deg); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .laptop-screen::before { content: ''; width: 80%; height: 70%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); opacity: 0.6; filter: blur(4px); animation: screenGlow 2s infinite alternate; }
+        @keyframes screenGlow { from { opacity: 0.4; } to { opacity: 0.8; } }
+        #working-laptop.active { opacity: 1; transform: scale(1) rotate(0deg); }
+
+        #handyman-cap { position: fixed; width: 60px; height: 30px; z-index: 1001; opacity: 0; transform: scale(0); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; }
+        .cap-top { width: 45px; height: 25px; background: #1e3a8a; border-radius: 50% 50% 0 0; position: absolute; top: 0; left: 7.5px; }
+        .cap-brim { width: 40px; height: 6px; background: #1e40af; border-radius: 0 10px 10px 0; position: absolute; bottom: 5px; left: 30px; }
+        #handyman-cap.active { opacity: 1; transform: scale(1); }
+        #handyman-wrench { position: fixed; width: 40px; height: 40px; z-index: 1001; opacity: 0; transform: scale(0) rotate(-45deg); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; }
+        #handyman-wrench.active { opacity: 1; transform: scale(1) rotate(0deg); animation: wrenchTinker 1.5s infinite ease-in-out; }
+        @keyframes wrenchTinker { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(30deg); } }
+
+        #sleep-zzzs { position: fixed; pointer-events: none; z-index: 1001; opacity: 0; transition: opacity 0.5s ease; }
+        #sleep-zzzs.active { opacity: 1; }
+        .zzz { position: absolute; color: #1a1a1a; font-family: 'Montserrat', sans-serif; font-weight: 900; animation: floatZ 3s infinite linear; opacity: 0; }
+        @keyframes floatZ { 0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 0; } 15% { opacity: 1; } 50% { transform: translate(15px, -40px) scale(0.8) rotate(10deg); } 85% { opacity: 1; } 100% { transform: translate(0px, -100px) scale(1.3) rotate(-10deg); opacity: 0; } }
+
+        /* --- BULLE DE TEXTE --- */
+        .speech-bubble { position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%) translateY(0) scale(0); background: white; border: 2px solid #1a1a1a; padding: 14px 20px; border-radius: 18px; width: 240px; font-size: 0.95rem; color: #1a1a1a; font-weight: 500; pointer-events: none; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; z-index: 1001; }
+        .speech-bubble::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -8px; border-width: 8px; border-style: solid; border-color: #1a1a1a transparent transparent transparent; }
+        .speech-bubble.active { transform: translateX(-50%) translateY(-10px) scale(1); }
+        .bubble-icon { display: block; margin-bottom: 5px; font-size: 2.2rem; }
+
+        /* --- MENU --- */
+        nav ul { list-style: none; display: flex; gap: 40px; padding: 0; margin: 0; }
+        nav a { text-decoration: none; color: #1a1a1a; font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 3px; transition: 0.3s ease; position: relative; padding-bottom: 5px; }
+        nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background-color: #1a1a1a; transition: width 0.3s ease; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+
+        /* --- BOUTON RETOUR EN HAUT --- */
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: #1a1a1a; color: #ffffff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: translateY(-5px); background-color: #000; }
+
+        /* --- FORMULAIRE --- */
+        .form-section {
+            max-width: 800px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-form { text-align: left; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); border: 1px solid #f0f0f0; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .form-group { position: relative; margin-bottom: 40px; }
+        .form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: #aaa; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid #eee; background: transparent; font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #1a1a1a; outline: none; transition: border-color 0.3s ease; }
+        .form-group input:focus, .form-group textarea:focus { border-bottom-color: #1a1a1a; }
+
+        .submit-btn { background-color: #1a1a1a; color: #ffffff; border: none; padding: 20px 60px; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; transition: all 0.3s ease; float: right; border-radius: 5px; }
+        .submit-btn:hover { transform: translateY(-3px); background-color: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+        footer { padding: 60px 0; text-align: center; font-size: 0.8rem; color: #999; clear: both; }
+
+        @media (max-width: 950px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .logo-ball { position: relative !important; left: auto !important; top: auto !important; margin: 40px auto; }
+            .hero-contact { height: auto; padding: 40px 0; clip-path: none; }
+            .hero-content-box { padding: 30px 20px; margin: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="fishing-lake"></div>
+    <div id="working-laptop">
+        <div class="laptop-screen"></div>
+        <div class="laptop-base"></div>
+    </div>
+    <div id="handyman-cap">
+        <div class="cap-top"></div>
+        <div class="cap-brim"></div>
+    </div>
+    <div id="handyman-wrench">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+    </div>
+    <div id="sleep-zzzs">
+        <div class="zzz" style="animation-delay: 0s; font-size: 0.9rem; left: 10px;">Z</div>
+        <div class="zzz" style="animation-delay: 1s; font-size: 1.4rem; left: 25px;">Z</div>
+        <div class="zzz" style="animation-delay: 2s; font-size: 2rem; left: 40px;">Z</div>
+    </div>
+    <svg id="fishing-rod-svg">
+        <line id="rod-stick" x1="0" y1="0" x2="0" y2="0" />
+        <path id="rod-line" d="" />
+    </svg>
+
+    <header>
+        <div id="vmBall" class="logo-ball bouncing">
+            VM
+            <div id="bubble" class="speech-bubble">
+                <span id="bubble-icon" class="bubble-icon">🎣</span>
+                <span id="bubble-text">Salut !</span>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-contact">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="vidéo-ecurie.mp4" type="video/mp4"> 
+        </video>
+        <div class="hero-content-box">
+            <!-- Titre stylé blanc sur fond noir "surligneur" -->
+            <h3 class="contact-title">contact</h3>
+            <p class="contact-intro">
+                N’hésitez pas à me contacter, que ce soit pour discuter d’une opportunité professionnelle, échanger autour d’un projet… ou simplement parler de la pluie et du beau temps ! Je serai ravi de vous répondre.
+            </p>
+            <a href="CV Valentin Michel (4).pdf" class="cv-button" target="_blank">📄 Visualiser mon CV</a>
+        </div>
+    </section>
+
+    <main class="form-section">
+        <section class="contact-form">
+            <form action="#" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nom Complet</label>
+                        <input type="text" id="name" name="name" placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Ex: jean@exemple.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Objet</label>
+                    <input type="text" id="subject" name="subject" placeholder="De quoi souhaiteriez-vous discuter ?">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Votre Message</label>
+                    <textarea id="message" name="message" placeholder="Dites-moi tout..."></textarea>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn">Envoyer</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <button id="backToTop" class="back-to-top" title="Remonter en haut">↑</button>
+
+    <footer>
+        <p>© 2026 Valentin Michel — Tous droits réservés</p>
+    </footer>
+
+    <script>
+        const ball = document.getElementById('vmBall');
+        const bubble = document.getElementById('bubble');
+        const bubbleText = document.getElementById('bubble-text');
+        const bubbleIcon = document.getElementById('bubble-icon');
+        const lake = document.getElementById('fishing-lake');
+        const laptop = document.getElementById('working-laptop');
+        const cap = document.getElementById('handyman-cap');
+        const wrench = document.getElementById('handyman-wrench');
+        const sleepZzzs = document.getElementById('sleep-zzzs');
+        const rodSvg = document.getElementById('fishing-rod-svg');
+        const rodStick = document.getElementById('rod-stick');
+        const rodPath = document.getElementById('rod-line');
+        const backToTopBtn = document.getElementById('backToTop');
+
+        const ballSize = 85;
+        const formWidth = 800;
+        let posX = 50;
+        let posY = 200;
+        let currentRotation = 0;
+        
+        let currentState = 'standing'; 
+        let targetX = posX;
+        let targetY = posY;
+        
+        let moveProgress = 0;
+        let startX = posX;
+        let startY = posY;
+
+        const actions = [
+            { id: 'fishing', text: "Si vous êtes fan de pêche, dites-le moi, j'adore ça !", icon: "🎣", duration: 10000 },
+            { id: 'working', text: "Je peaufine mes derniers projets sur mon ordi...", icon: "💻", duration: 10000 },
+            { id: 'sleeping', text: "zzzz.... Vous êtes encore là ? Prenez votre temps... zzzz....", icon: "😴", duration: 10000 },
+            { id: 'bricolage', text: "Je bricole un petit truc, j'aime réparer et créer !", icon: "🔧", duration: 10000 },
+            { id: 'cv_promo', text: "Curieux de voir mon parcours ? Mon CV est juste au-dessus !", icon: "📄", duration: 8000 }
+        ];
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        };
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function getSafePosition() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const margin = (w - formWidth) / 2;
+            let x;
+            if (Math.random() > 0.5 && w > 950) {
+                x = (w - margin) + Math.random() * (margin - ballSize - 100) + 50;
+            } else if (w > 950) {
+                x = Math.random() * (margin - ballSize - 100) + 50;
+            } else {
+                x = Math.random() * (w - ballSize);
+            }
+            const y = 150 + Math.random() * (h - ballSize - 250);
+            return { x, y };
+        }
+
+        function showBubble(text, icon, permanent = false) {
+            bubbleText.innerText = text;
+            bubbleIcon.innerText = icon;
+            bubble.classList.add('active');
+            if (!permanent) {
+                setTimeout(() => {
+                    const activeStates = ['fishing', 'sleeping', 'working', 'bricolage', 'cv_promo'];
+                    if (!activeStates.includes(currentState)) {
+                        bubble.classList.remove('active');
+                    }
+                }, 6000);
+            }
+        }
+
+        function startJump() {
+            if (currentState !== 'standing') return;
+            const next = getSafePosition();
+            startX = posX; startY = posY;
+            targetX = next.x; targetY = next.y;
+            currentState = 'jumping';
+            moveProgress = 0;
+            ball.classList.remove('bouncing'); 
+            animateJump();
+        }
+
+        function animateJump() {
+            if (currentState !== 'jumping') return;
+            moveProgress += 0.015;
+            if (moveProgress >= 1) {
+                posX = targetX; posY = targetY;
+                currentState = 'standing';
+                ball.classList.add('bouncing');
+                updatePosition();
+                return;
+            }
+            posX = startX + (targetX - startX) * moveProgress;
+            const parabola = Math.sin(moveProgress * Math.PI) * 150;
+            posY = (startY + (targetY - startY) * moveProgress) - parabola;
+            updatePosition();
+            requestAnimationFrame(animateJump);
+        }
+
+        function startRoll() {
+            if (currentState !== 'standing') return;
+            const next = getSafePosition();
+            startX = posX; startY = posY;
+            targetX = next.x; targetY = next.y;
+            currentState = 'rolling';
+            moveProgress = 0;
+            ball.classList.remove('bouncing');
+            animateRoll();
+        }
+
+        function animateRoll() {
+            if (currentState !== 'rolling') return;
+            moveProgress += 0.01;
+            if (moveProgress >= 1) {
+                posX = targetX; posY = targetY;
+                currentState = 'standing';
+                ball.classList.add('bouncing');
+                updatePosition();
+                return;
+            }
+            const oldX = posX;
+            posX = startX + (targetX - startX) * moveProgress;
+            posY = startY + (targetY - startY) * moveProgress;
+            currentRotation += ((posX - oldX) * 4);
+            updatePosition();
+            requestAnimationFrame(animateRoll);
+        }
+
+        function updatePosition() {
+            ball.style.left = posX + 'px';
+            ball.style.top = posY + 'px';
+            if (currentState === 'rolling' || currentState === 'jumping') {
+                ball.style.transform = `rotate(${currentRotation}deg)`;
+            } else {
+                currentRotation = 0;
+                ball.style.transform = `rotate(0deg)`;
+            }
+            if (currentState === 'fishing') updateFishingRod();
+            if (currentState === 'working') { laptop.style.left = (posX + 65) + 'px'; laptop.style.top = (posY + 30) + 'px'; }
+            if (currentState === 'sleeping') { sleepZzzs.style.left = (posX + 50) + 'px'; sleepZzzs.style.top = (posY - 10) + 'px'; }
+            if (currentState === 'bricolage') { cap.style.left = (posX + 15) + 'px'; cap.style.top = (posY - 20) + 'px'; wrench.style.left = (posX + 80) + 'px'; wrench.style.top = (posY + 40) + 'px'; }
+        }
+
+        function updateFishingRod() {
+            const ballCenterX = posX + ballSize / 2;
+            const ballCenterY = posY + ballSize / 2;
+            const stickEndX = ballCenterX + 40;
+            const stickEndY = ballCenterY - 40;
+            const lakeX = posX + 50;
+            const lakeY = posY + 95;
+            rodStick.setAttribute('x1', ballCenterX);
+            rodStick.setAttribute('y1', ballCenterY);
+            rodStick.setAttribute('x2', stickEndX);
+            rodStick.setAttribute('y2', stickEndY);
+            rodPath.setAttribute('d', `M ${stickEndX},${stickEndY} L ${lakeX},${lakeY}`);
+        }
+
+        function performAction() {
+            if (currentState !== 'standing') return;
+            const action = actions[Math.floor(Math.random() * actions.length)];
+            currentState = action.id;
+            ball.classList.remove('bouncing'); 
+            updatePosition(); 
+            if (action.id === 'fishing') {
+                lake.style.left = (posX - 35) + 'px'; lake.style.top = (posY + 70) + 'px';
+                lake.classList.add('active'); rodSvg.classList.add('active');
+                updateFishingRod();
+            } else if (action.id === 'working') {
+                laptop.classList.add('active'); updatePosition();
+            } else if (action.id === 'sleeping') {
+                sleepZzzs.classList.add('active'); updatePosition();
+            } else if (action.id === 'bricolage') {
+                cap.classList.add('active'); wrench.classList.add('active'); updatePosition();
+            }
+            showBubble(action.text, action.icon, true);
+            setTimeout(() => {
+                currentState = 'standing';
+                bubble.classList.remove('active');
+                lake.classList.remove('active'); rodSvg.classList.remove('active');
+                laptop.classList.remove('active'); sleepZzzs.classList.remove('active');
+                cap.classList.remove('active'); wrench.classList.remove('active');
+                ball.classList.add('bouncing'); 
+            }, action.duration);
+        }
+
+        function logicLoop() {
+            if (currentState === 'standing') {
+                const rand = Math.random();
+                if (rand < 0.15) startJump();
+                else if (rand < 0.30) startRoll();
+                else performAction();
+            }
+            setTimeout(logicLoop, 5000);
+        }
+
+        window.addEventListener('load', () => {
+            if (!sessionStorage.getItem('introPlayed')) { sessionStorage.setItem('introPlayed', 'true'); }
+            const start = getSafePosition();
+            posX = start.x; posY = start.y;
+            updatePosition();
+            setTimeout(logicLoop, 3000);
+        });
+
+        ball.addEventListener('click', () => {
+            if (currentState !== 'jumping' && currentState !== 'rolling') {
+                showBubble("Oups ! Je bouge !", "🚀");
+                lake.classList.remove('active'); rodSvg.classList.remove('active');
+                laptop.classList.remove('active'); sleepZzzs.classList.remove('active');
+                cap.classList.remove('active'); wrench.classList.remove('active');
+                currentState = 'standing';
+                Math.random() > 0.5 ? startJump() : startRoll();
+            }
+        });
+    </script>
+
+</body>
+</html>

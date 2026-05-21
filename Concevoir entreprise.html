@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentin Michel | Concevoir un projet d'entreprise</title>
+    
+    <!-- Importation des polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --sidebar-bg: #2b3d5b; /* Bleu nuit */
+            --accent: #eab308; /* Jaune moutarde */
+            --text-dark: #0f172a;
+            --text-light: #ffffff;
+            --text-gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 15px 5%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-link { text-decoration: none; display: flex; align-items: center; }
+        .logo {
+            background: var(--text-dark); color: var(--text-light);
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-family: 'Montserrat', sans-serif; font-weight: 900;
+            font-size: 1.2rem; transition: transform 0.3s;
+        }
+        .logo-link:hover .logo { transform: scale(1.05); }
+
+        nav ul { 
+            list-style: none; display: flex; gap: 15px; margin: 0; align-items: center;
+        }
+
+        nav a {
+            text-decoration: none; color: var(--text-dark); font-family: 'Inter', sans-serif;
+            font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 10px 20px; border-radius: 30px; transition: all 0.3s ease; 
+        }
+
+        nav a:hover { background-color: #f1f5f9; transform: translateY(-2px); }
+        nav a.active {
+            background-color: var(--sidebar-bg); color: var(--text-light) !important;
+            box-shadow: 0 4px 15px rgba(43, 61, 91, 0.3);
+        }
+
+        /* --- HERO SECTION DU PROJET --- */
+        .project-hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            margin-top: 80px; /* Compense le header fixe */
+            background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.7); /* Overlay sombre */
+            z-index: 1;
+        }
+
+        .project-hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--text-light);
+            padding: 0 20px;
+            max-width: 900px;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        /* --- CONTENU DU PROJET --- */
+        .project-container {
+            max-width: 1000px;
+            margin: -60px auto 100px; /* Remonte légèrement sur l'image */
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* BLOC META (Contexte, Objectif, Résultat) */
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .meta-box { padding: 20px; background: #f8fafc; border-radius: 12px; border-left: 4px solid var(--sidebar-bg); }
+        .meta-box.highlight { background: #fffbeb; border-left-color: var(--accent); } /* Boîte Résultat */
+        
+        .meta-title { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--sidebar-bg); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .meta-box.highlight .meta-title { color: #b45309; }
+        .meta-text { font-size: 1rem; color: var(--text-gray); font-weight: 500; }
+        .meta-box.highlight .meta-text { color: var(--text-dark); font-weight: 700; }
+
+        /* TEXTE ET SECTIONS */
+        .project-section { margin-bottom: 50px; }
+        
+        .project-section h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            transform: rotate(-1deg);
+        }
+
+        .project-section h2::after {
+            content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 10px;
+            background-color: var(--accent); opacity: 0.3; z-index: -1; transform: rotate(1deg);
+        }
+
+        .project-section p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        /* BLOC STATISTIQUES (Étude documentaire) */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: var(--sidebar-bg);
+            color: var(--text-light);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(43, 61, 91, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover { transform: translateY(-5px); }
+        .stat-number { font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 900; color: var(--accent); margin-bottom: 10px; line-height: 1; }
+        .stat-desc { font-size: 0.95rem; font-weight: 500; opacity: 0.9; }
+
+        /* LISTE DES ACTIONS (Grille) */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .action-card {
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #ffffff;
+            transition: box-shadow 0.3s;
+        }
+
+        .action-card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .action-icon { font-size: 2rem; margin-bottom: 15px; }
+        .action-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 10px; }
+        .action-list { padding-left: 20px; color: var(--text-gray); font-size: 0.95rem; }
+        .action-list li { margin-bottom: 8px; }
+
+        /* BOUTON RETOUR */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover { background-color: var(--text-dark); color: var(--text-light); }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 992px) {
+            nav ul { display: none; }
+            .project-container { padding: 40px 20px; margin-top: -30px; border-radius: 20px 20px 0 0; }
+            .actions-grid { grid-template-columns: 1fr; }
+            .project-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <a href="index.html" class="logo-link">
+            <div class="logo">VM</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#a-propos">À propos</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION DU PROJET -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <span class="project-tag">Entrepreneuriat</span>
+            <h1>Concevoir un projet d'entreprise</h1>
+        </div>
+    </section>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="project-container">
+        
+        <a href="portfolio.html" class="back-btn">← Retour au portfolio</a>
+
+        <!-- MÉTA DONNÉES -->
+        <div class="project-meta">
+            <div class="meta-box">
+                <div class="meta-title">Le Contexte</div>
+                <div class="meta-text">Participation à un concours entrepreneurial sur l’année universitaire de création d’entreprise à l'IUT de Saint-Étienne.</div>
+            </div>
+            <div class="meta-box">
+                <div class="meta-title">L'Objectif</div>
+                <div class="meta-text">Créer un projet viable et convaincre un jury professionnel pour financer et accompagner le projet.</div>
+            </div>
+            <div class="meta-box highlight">
+                <div class="meta-title">Le Résultat 🏆</div>
+                <div class="meta-text">1ère place au concours entrepreneuriat et mise en relation avec l'incubateur de Saint-Étienne.</div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : LA RÉFLEXION -->
+        <div class="project-section">
+            <h2>De l'idée initiale au pivot stratégique</h2>
+            <p>
+                L'idée de départ consistait à proposer la création de sites internet sur mesure. Pour valider cette offre, j'ai élaboré et envoyé des questionnaires à des PME/TPE manquant de visibilité. L'analyse des résultats a été sans appel : <strong>le marché était saturé</strong>. Face à une concurrence rude (Ionos, agences de communication locales, plateformes automatisées), il était indispensable de chercher à se diversifier.
+            </p>
+            <p>
+                Une étude documentaire approfondie m'a permis d'identifier une niche très peu exploitée, particulièrement au niveau local : <strong>l'optimisation du référencement sur Google Maps (SEO Local)</strong>.
+            </p>
+
+            <!-- STATISTIQUES -->
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">72%</div>
+                    <div class="stat-desc">Des consommateurs recherchent d'abord sur internet pour une information locale.</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">92%</div>
+                    <div class="stat-desc">Se rendent dans les points de vente qui apparaissent en premier.</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-desc">Font autant confiance aux avis en ligne qu’aux recommandations de leurs pairs.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2 : LES ACTIONS -->
+        <div class="project-section">
+            <h2>Actions & Solutions Déployées</h2>
+            <p>
+                Pour répondre à ce besoin, le projet s'est articulé autour de plusieurs axes mêlant commerce, communication et dimension technique.
+            </p>
+
+            <div class="actions-grid">
+                
+                <div class="action-card">
+                    <div class="action-icon">📍</div>
+                    <h3 class="action-title">SEO & Google Maps</h3>
+                    <ul class="action-list">
+                        <li>Optimisation SEO pour Google Maps.</li>
+                        <li>Développement de fiches Google My Business.</li>
+                        <li>Création de supports : E-books de formation et cartes NFC pour la récolte d'avis.</li>
+                        <li>Formation des équipes des clients.</li>
+                    </ul>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">💻</div>
+                    <h3 class="action-title">Analyse Data & Tech</h3>
+                    <ul class="action-list">
+                        <li>Analyse de données textuelles approfondie.</li>
+                        <li>Mise en place de techniques de <strong>Webscrapping</strong>.</li>
+                        <li>Création d'un site internet vitrine pour le projet.</li>
+                    </ul>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">📱</div>
+                    <h3 class="action-title">Image & Réseaux Sociaux</h3>
+                    <ul class="action-list">
+                        <li>Création de contenus sur mesure.</li>
+                        <li>Gestion de l'image sur les réseaux sociaux.</li>
+                        <li>Analyse des retombées textuelles et de l'engagement.</li>
+                    </ul>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">💼</div>
+                    <h3 class="action-title">Business & Vente</h3>
+                    <ul class="action-list">
+                        <li>Création du Business Model et du Business Plan.</li>
+                        <li>Élaboration du chiffre d'affaires prévisionnel.</li>
+                        <li>Démarchage client : transformation et accompagnement de plusieurs projets.</li>
+                        <li>Préparation du pitch de levée de fonds (gestion d'équipe).</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- BOUTON RETOUR EN HAUT -->
+    <script>
+        // Simple script pour remonter en haut si besoin, bien que la page soit structurée pour se lire de haut en bas.
+    </script>
+</body>
+</html>
